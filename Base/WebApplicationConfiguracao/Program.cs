@@ -1,3 +1,5 @@
+using Repository;
+
 namespace WebApplicationConfiguracao
 {
     public class Program
@@ -12,6 +14,10 @@ namespace WebApplicationConfiguracao
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Register DbContext
+            services.AddDbContext<MyDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
 
             var app = builder.Build();
 
